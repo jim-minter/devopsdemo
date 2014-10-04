@@ -9,26 +9,23 @@
 	<cm:property-placeholder id="props"
 		persistent-id="email" />
 
-	<camelContext xmlns="http://camel.apache.org/schema/blueprint"
-		xmlns:order="http://fusesource.com/examples/order/v7" id="jms-example-context">
-
-		<route id="sendmail-route">
-			<from uri="amq:bookings" />
-			<setHeader headerName="to">
-				<xpath>/customer/email/text()</xpath>
-			</setHeader>
-			<setHeader headerName="from">
-				<constant>ticketmonster@redhat.com</constant>
-			</setHeader>
-			<setHeader headerName="subject">
-				<constant>Thank-you for your booking</constant>
-			</setHeader>
-			<setBody>
-				<xpath>/customer/message/text()</xpath>
-			</setBody>
-			<to uri="smtp://{{smtp.email.server}}" />
-		</route>
-
-	</camelContext>
+	<camelContext id="jms-example-context" xmlns="http://camel.apache.org/schema/blueprint" xmlns:order="http://fusesource.com/examples/order/v7">
+    <route customId="true" id="sendmail-route">
+        <from uri="amq:bookings"/>
+        <setHeader headerName="to">
+            <xpath>/customer/email/text()</xpath>
+        </setHeader>
+        <setHeader headerName="from">
+            <constant>ticketmonster@redhat.com</constant>
+        </setHeader>
+        <setHeader headerName="subject">
+            <constant>subject</constant>
+        </setHeader>
+        <setBody>
+            <xpath>/customer/message/text()</xpath>
+        </setBody>
+        <to uri="smtp://{{smtp.email.server}}"/>
+    </route>
+</camelContext>
 
 </blueprint>
