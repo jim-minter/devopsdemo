@@ -19,7 +19,7 @@
             <constant>ticketmonster@redhat.com</constant>
         </setHeader>
         <setHeader headerName="subject">
-            <constant>subject</constant>
+            <constant>Thank-you for your booking!</constant>
         </setHeader>
         <setBody>
             <xpath>/customer/message/text()</xpath>
